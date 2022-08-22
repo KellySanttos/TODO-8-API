@@ -1,6 +1,8 @@
+import { v4 as uuidv4 } from "uuid";
+
 class Musicas {
     constructor(nome, cantor, duracao, album){
-        this.id = 1;
+        this.id = uuidv4();
         this.nome = nome;
         this.cantor = cantor;
         this.duracao = duracao;
