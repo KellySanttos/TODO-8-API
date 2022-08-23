@@ -1,20 +1,8 @@
 import db from "../infra/db-sqlite.js";
 
-const getFrases = () => {
-  return new Promise((resolve, reject) => {
-    db.all("SELECT * FROM FRASES", (erro, rows) => {
-      if (erro) {
-        reject(erro.message);
-      } else {
-        resolve(rows);
-      }
-    });
-  });
-};
-
-const getFrasesId = (id) => {
+const getFrasesRandom = () => {
     return new Promise((resolve, reject) => {
-      db.get("SELECT * FROM FRASES WHERE ID = ?", id, (erro, rows) => {
+      db.get("SELECT * FROM FRASES WHERE ID = (ABS(RANDOM()) % (SELECT (SELECT MAX(ID) FROM FRASES) +1 ))", (erro, rows) => {
         if (erro) {
           reject(erro.message);
         } else {
@@ -23,6 +11,7 @@ const getFrasesId = (id) => {
       });
     });
   };
+
 
 const postFrase = (model) => {
   return new Promise((resolve, reject) => {
@@ -43,7 +32,7 @@ const postFrase = (model) => {
     );
   });
 };
+  
 
 
-
-export { getFrases, getFrasesId, postFrase };
+export { getFrasesRandom, postFrase };

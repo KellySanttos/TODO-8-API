@@ -1,20 +1,8 @@
 import db from "../infra/db-sqlite.js";
 
-const getMusics = () => {
-  return new Promise((resolve, reject) => {
-    db.all("SELECT * FROM MUSICAS", (erro, rows) => {
-      if (erro) {
-        reject(erro.message);
-      } else {
-        resolve(rows);
-      }
-    });
-  });
-};
-
-const getMusicsId = (id) => {
+const getMusicsRandom = () => {
     return new Promise((resolve, reject) => {
-      db.get("SELECT * FROM MUSICAS WHERE ID = ?", id, (erro, rows) => {
+      db.get("SELECT * FROM MUSICAS WHERE ID = (ABS(RANDOM()) % (SELECT (SELECT MAX(ID) FROM MUSICAS) +1 ))", (erro, rows) => {
         if (erro) {
           reject(erro.message);
         } else {
@@ -48,4 +36,4 @@ const postMusic = (model) => {
 
 
 
-export { getMusics, getMusicsId, postMusic };
+export { getMusicsRandom, postMusic };

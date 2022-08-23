@@ -1,11 +1,10 @@
-import { getBooks, getBooksId, postBook } from "../dao/livros-dao.js";
+import { getBooksRandom, postBook } from "../dao/livros-dao.js";
 import LivrosModel from "../models/Livros.js";
 
 export const livrosController = (app) => {
 
     app.get("/books", async (req, res) => {
-        const resposta = await getBooks();
-        const livroAleat = await getBooksId(Math.round(Math.random() * (resposta.length -1)))
+        const livroAleat = await getBooksRandom();
         res.json({ livro: livroAleat })
     })
 

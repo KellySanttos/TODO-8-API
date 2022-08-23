@@ -1,20 +1,9 @@
 import db from "../infra/db-sqlite.js";
 
-const getBooks = () => {
-  return new Promise((resolve, reject) => {
-    db.all("SELECT * FROM LIVROS", (erro, rows) => {
-      if (erro) {
-        reject(erro.message);
-      } else {
-        resolve(rows);
-      }
-    });
-  });
-};
 
-const getBooksId = (id) => {
+const getBooksRandom = () => {
     return new Promise((resolve, reject) => {
-      db.get("SELECT * FROM LIVROS WHERE ID = ?", id, (erro, rows) => {
+      db.get("SELECT * FROM LIVROS WHERE ID = (ABS(RANDOM()) % (SELECT (SELECT MAX(ID) FROM LIVROS) +1 ))", (erro, rows) => {
         if (erro) {
           reject(erro.message);
         } else {
@@ -47,5 +36,4 @@ const postBook = (model) => {
 };
 
 
-
-export { getBooks, getBooksId, postBook };
+export { getBooksRandom, postBook };

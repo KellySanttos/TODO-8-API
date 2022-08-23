@@ -1,11 +1,10 @@
-import { getMusics, getMusicsId, postMusic } from "../dao/musics-dao.js";
+import { getMusicsRandom, postMusic } from "../dao/musics-dao.js";
 import MusicsModel from "../models/MusicRelaxing.js";
 
 export const musicController = (app) => {
 
     app.get("/musics", async (req, res) => {
-        const resposta = await getMusics();
-        const musicAleat = await getMusicsId(Math.round(Math.random() * (resposta.length -1)))
+        const musicAleat = await getMusicsRandom();
         res.json({ música: musicAleat })
     })
 
