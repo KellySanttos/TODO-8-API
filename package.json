@@ -5,6 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "start": "node ./src/app.js",
+    "database": "node ./src/infra/create-populate.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.1",
+    "sqlite3": "^5.0.11",
     "uuidv4": "^6.2.13"
   }
 }
